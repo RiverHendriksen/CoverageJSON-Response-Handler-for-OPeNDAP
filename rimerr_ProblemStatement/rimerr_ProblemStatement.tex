@@ -1,0 +1,63 @@
+\documentclass[letterpaper,10pt,draftclsnofoot,onecolumn]{IEEEtran}
+\usepackage{graphicx, geometry, hyperref, geometry, listings, enumitem, balance, longtable, url, color, float, alltt, amsthm, amsmath, amssymb}
+\geometry{margin=.75in}
+\hypersetup{ %PDF Metadata setup
+  colorlinks = true,
+  urlcolor = black,
+  pdfauthor = {Riley Rimer},
+  pdfkeywords = {CS 462 Problem Statement},
+  pdftitle = {CS 462 Problem Statement},
+  pdfsubject = {CS 462 Problem Statement},
+  pdfpagemode = UseNone
+}
+
+\title{
+Fall 2017 CS 461 Problem Statement\\
+\large CoverageJSON Response Handler for OPeNDAP
+}
+\author{Riley Rimer}
+\date{October 5, 2017}
+
+\begin{document}
+\begin{titlepage}
+
+\maketitle
+\centering
+
+\begin{abstract}
+The purpose of this project is to integrate the CoverageJSON data format into the currently existing data response handlers in the OPeNDAP network data access protocol. Implementing this data response handler will involve interfacing with the OPeNDAP team/community and NASA JPL to gather requirements and gain an understanding of the OPeNDAP code base. Then designing a response handler that can be incorporated into OPeNDAP using the already implemented response handlers as guideline. OPeNDAP currently does not provide data access handlers for a coverage data format like CoverageJSON, which is a structure that associates positions in space and time with corresponding data values. The addition of the CoverageJSON data format into OPeNDAP will allow for more fluid creation of coverage data based web applications by NASA JPL and all other OPeNDAP users. Due to the desire for the new response handler to be integrated into the OPeNDAP project, the data handler will need to be accompanied by extensive documentation and testing. This project will also include testing current NASA satellite data in OPeNDAP on the proposed response handler and creating a poster for the Agricultural Geophysical Union.
+\end{abstract}
+
+\end{titlepage}
+
+\section{Problem Statement}
+One way that satellite data is currently handled by NASA is through OPeNDAP, which stands for "Open-source Project for a Network Data Access Protocol". OPeNDAP is a data transport protocol that supplies its users a way to provide and request data across the web. One of the main points of the protocol is the ability  to pull data in multiple different formats including ASCII, netCDF3, netCDF4 and binary (DAP2) object serializations. OPeNDAP currently does not have a response handlers in place to serve data in the CoverageJSON data format, which is a JavaScript Object Notation(JSON) data format for describing coverages. CoverageJSON would be a very useful format to have available from OPeNDAP due to it encoding data values based upon a spatial temporal domain similar to how satellite data is collected from NASA's satellites. The integration of the CoverageJSON format into OPeNDAP would help support the creation of coverage data driven web applications by NASA JP(Jet Propulsion Lab)L and any other users of OPeNDAP.
+
+\section{Proposed Solution}
+The proposed solution would be to create a CoverageJSON response handler that can be integrated and added into the OPeNDAP code base.
+Initially our team would need to get a solid background in the following areas:
+ \begin{itemize}
+  \item NASA JPL's current data in OPeNDAP and how it will be represented in CoverageJSON.
+  \item The OPeNDAP code base and how response handling is done within OPeNDAP.
+  \item The CoverageJSON data format and how it can be integrated into OPeNDAP.
+\end{itemize}
+Gathering the required knowledge on these systems will require documentation and contact from NASA JPL and the OPeNDAP team/ community. We will also need to get information on the documentation and testing the OPeNDAP team will expect for the proposed response handler to be integrated into the OPeNDAP project. Once our group has a good understanding of how this protocol and data format can fit together we need to plan out the actual implementation of the CoverageJSON response handler. The response handler will be written in C++ and be based upon how the existing response handlers are currently written in the OPeNDAP project. The entirety of the project will be written using GitHub source control and will naturally be open source since it will be pulled into the OPeNDAP project. The documentation and testing done for the code will be up to the specifications we gather from the OPeNDAP team and NASA JPL. The implementation will also be tested to ensure it is fully compatible with the existing data that NASA JPL has in OPeNDAP. The deliverables expected for this implementation will be as follows:
+ \begin{itemize}
+  \item A project website that is served on GitHub that hosts all of the code and documentation.
+  \item The CoverageJSON response handler code, ready to be integrated or in the process of being integrated into OPeNDAP.
+  \item Documentation and testing to the level needed for the code to be integrated into OPeNDAP.
+  \item A poster outlining the project to the Agricultural Geophysical Union.
+\end{itemize}
+The project is expected to be complete in early 2018, and will be presented at Oregon State University in the engineering expo in May of 2018 with a poster outlining the project.
+
+\section{Performance Metrics}
+The success of this project will be measured primarily on the state of the CoverageJSON response handler by the end of the project period. Several factors that will also need to be weighed on the implementation are: 
+\begin{itemize}
+  \item The usability and quality of the response handler.
+  \item The integration of the response handler into the OPeNDAP code base.
+  \item The level of documentation for the response handler.
+  \item The depth of testing done on the response handler, including testing on current NASA JPL data.
+\end{itemize} 
+The project may still be considered a success even without the full completion of the response handler, but that will depend heavily on if the project will be able to be continued and the status of it being taken into the OPeNDAP project. The GitHub website is also a strict requirement for this project to ensure the continuation of the code that is created and its visibility. The poster outlining the project to the Agricultural Geophysical Union does not have very much weight on the success of the project itself and is more for the purpose of outlining the projects achievements. All of the deliverables discussed, including the poster, will need to be completed for the project to be considered a complete success.
+
+\end{document}
