@@ -61,4 +61,67 @@
 \pagenumbering{arabic}
 \clearpage
 
+% DATA ACCESS PROTOCOLS
+	% FTP
+    % OGC WCS
+    % OPeNDAP
+
+% SCIENTIFIC DATA FORMATS
+	% XML
+    % CSML
+	% CovJSON
+    
+% UI DATA MODELS
+	% DOMAIN
+    % APPLICATION
+    % TASK
+
+\section{Technology: Data Access Protocols}
+
+\subsection{Overview}
+The NASA Jet Propulsion Laboratory (JPL) podaac website allows scientific data access via several different servers and data access protocols. This project requires the use of a data access mechanism to access scientific data from NASA JPL servers and databases. We will be modifying this method to implement a data response handler for a new scientific data format. This section will discuss methods of data access, and will consider their attributes against the established criteria.
+
+\subsection{Criteria}
+\begin{enumerate}
+\item Machine-to-machine interoperability.
+\item Ability to work with heterogeneous data sets.
+\item Is an open-source software.
+\end{enumerate}
+\subsection{Potential Choices}
+
+\subsubsection{File Transfer Protocol (FTP)}
+File Transfer Protocol (FTP) is the most widely used data access protocol in existence, and is often used in tandem with secure shell (SSH) connections. FTP facilitates the transfer of files between a client and a server on a given network, and does so using separate connections for both data and control connections. The specification for FTP was written back in the early 70's, and there is a long list of FTP clients that are freely available for use. 
+
+\begin{enumerate}
+\item In terms of machine-to-machine interoperability, FTP is system agnostic, and can even handle file transfers between different operating systems. Generally speaking, if you need a file transferred, it can almost certainly be done via FTP.
+\item FTP can handle almost any file/data type you throw at it: image files (jpg, gif, etc.), executables (.exe), documents (xlsx, docx, pdf, etc.), archive files (.zip, .gz, etc.), and more.
+\item FTP isn’t an open-source software, per se, however, there are a number of open-source software which provide FTP solutions. Some examples would be FileZilla, WinSCP, and Cyberduck.
+\end{enumerate}
+
+\subsubsection{OpenGIS Consortium (OGC) Web Coverage Service (WCS)}
+OpenGIS Consortium (OGC) Web Coverage Service (WCS) is a protocol for accessing multi-dimensional coverage data over the internet. WCS is especially useful for handling gridded data sets, and other coordinate based data sets. In order to use WCS, coordinate based data must have complete information.
+\begin{enumerate}
+\item Since OGC WCS is a protocol based on HTTP, it is very reliable between machines as it is a network based protocol that functions in a request-response format.
+\item OGC WCS is rather limited in the data types it can handle. In comparison to FTP which can handle almost every data type except for scientific data formats, WCS only handles scientific data formats; more specifically, WCS likes “gridded” data sets.
+\item Unfortunately, OGC WCS is not an open-source project that can be added to. The OGC has a GitHub site which primarily deals with test suites for testing WCS functionality, but does not currently provide its source code openly.
+\end{enumerate}
+
+\subsubsection{Open-source Project for a Network Data Access Protocol (OPeNDAP)}
+OPeNDAP is an open-source network data access protocol developed by engineers at NASA JPL. The DAP2 protocol provides scientists and developers a discipline-neutral means of requesting and receiving data over the internet. OPeNDAP already contains request handlers for NetCDF, HDF, FreeForm, NcML scientific data formats.
+\begin{enumerate}
+\item OPeNDAP aims to be a core component of specialized systems that provide machine-to-machine interoperability.
+\item OPeNDAP can handle a wide variety of scientific data types such as NetCDF, HDF, and much more.
+\item OPeNDAP is a completely open-source project that is presented freely to the public. The purpose of the project is to provide an avenue for sharing data access with users of all disciplines, as well as a variety of services. 
+\end{enumerate}
+
+\subsection{Discussion}
+Although FTP is a reliable and widely used protocol, it is not a good candidate for integrating a response handler. FTP has good machine-to-machine interoperability, handles a wide variety of data types, but is not really an open-source project which can be contributed to. OGC WCS also has good machine-to-machine interoperability due to being based off of HTTP, but is fairly limited in that it really only handles a small number of data types, primarily “gridded” coordinate data sets, which is good for coverage data. However, OGC WCS is not currently an open-source project, which makes it a poor project candidate. Lastly, OPeNDAP is committed to being a primary component in making machine-to-machine interoperability easier, handles a wide variety of scientific data types like NetCDF, HDF, and FreeForm, and is a completely open-source project.
+
+\subsection{Conclusion}
+OPeNDAP is the best candidate for data access of the three choices. It is a perfect selection for adding a new scientific data response handler.
+
+\section{Technology: Scientific Data Formats}
+
+\subsection{Overview}
+
 \end{document}
