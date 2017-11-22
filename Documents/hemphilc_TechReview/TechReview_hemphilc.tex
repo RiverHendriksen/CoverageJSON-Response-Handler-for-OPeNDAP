@@ -6,6 +6,26 @@
 \usepackage{geometry}
 \geometry{textheight=9.5in, textwidth=7in}
 
+\usepackage{listings}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, 
+         numberstyle=\tiny,          
+         numbersep=5pt,             
+         tabsize=2,                
+         extendedchars=true,      
+         breaklines=true,        
+         showspaces=false,      
+         showtabs=false,       
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         showstringspaces=false 
+ }
+ \lstloadlanguages{
+         Python
+ }
+
 % 1. Fill in these details
 \def \CapstoneTeamNumber{55}
 \def \GroupMemberOne{Riley Rimer}
@@ -30,7 +50,7 @@
 \par\vspace{-12pt} \textit{\tiny\noindent
 \makebox[2.75in]{} \hfil		\makebox[3.25in]{\makebox[2.25in][r]{Signature} \hfill	\makebox[.75in][r]{Date}}}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \begin{titlepage}
     \pagenumbering{gobble}
@@ -52,9 +72,9 @@
             \par\vspace{1.0in}
         }
         \begin{abstract}
-        This document reviews the possible technologies choices that can be used for the CoverageJSON Response Handler for OPeNDAP project.
-
-        \end{abstract}     
+        \centering
+        \noindent This document compares and contrasts several potential technology choices that can be used for the CoverageJSON Response Handler for OPeNDAP project. The three technologies discussed here are data access protocols, scientific data formats, and UI data models. For data access protocols, File Transfer Protocol (FTP), Thematic Real-time Environmental Distributed Data Services (THREDDS), and Open-source Project for a Network Data Access Protocol (OPeNDAP) are considered. For scientific data formats, Extensible Markup Language (XML), Climate Science Modeling Language (CSML), and CoverageJSON (CovJSON) are considered. And lastly, for UI data models, domain, application, and task models are considered.
+        \end{abstract}
     \end{singlespace}
 \end{titlepage}
 \newpage
@@ -123,5 +143,37 @@ OPeNDAP is the best candidate for data access of the three choices. It is a perf
 \section{Technology: Scientific Data Formats}
 
 \subsection{Overview}
+The NASA JPL podaac website provides a number of scientific data formats for scientists and developers to utilize in their research and development. These formats include NetCDF, HDF, MD5, and more. This project requires a scientific data format that deals almost exclusively with satellite coverage data. We will be implementing a response handler for this scientific data format, and we will be integrating this handler with a data access method from the previous section. This section will discuss different data formats, and will consider their attributes against the established criteria.
+
+\subsection{Criteria}
+\begin{enumerate}
+\item Ability to process and handle satellite coverage data
+\item Format is simple and easy to use
+\item Incorporates metadata
+\end{enumerate}
+
+\subsection{Potential Choices}
+
+\subsubsection{Extensible Markup Language (XML)}
+XML is a common markup language and is used in a wide number of applications. XML is popular due to its ease of use and its readability. In short, XML encodes data into a structured format which includes both metadata and the corresponding data.
+\begin{enumerate}
+\item Although it may be possible to use XML to handle satellite coverage data, it was not necessarily designed for the task. This could be problematic in the future.
+\item XML can be used to convey relatively simple formats, and it is pretty easy to learn and use.
+\item XML is a metadata based markup language
+\end{enumerate}
+
+XML Example:
+\lstinputlisting[language=XML]{xml_ex.xml}
+
+\subsubsection{Climate Science Modeling Language (CSML)}
+CSML is a modeling language that specializes in handling both atmospheric and oceanographic data sets, which can be very similar to coverage data sets. Data types in CSML are generally defined primarily based on geometric and topologic data structures which describe discrete locations in space and time.
+\begin{enumerate}
+\item CSML is not explicitly described as a language for handling coverage data sets, however, it could likely be used for the task as atmospheric and oceanographic data sets can be described with similar data.
+\item CSML is no more or less easy to use than XML, however, features in CSML tend to be a little more complicated in terms of structure.
+\item CSML is a metadata based modeling/markup language
+\end{enumerate}
+
+CSML Example:
+\lstinputlisting[language=XML]{csml_ex.xml}
 
 \end{document}
