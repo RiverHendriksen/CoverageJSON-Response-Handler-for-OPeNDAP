@@ -28,9 +28,6 @@
 
 % 1. Fill in these details
 \def \CapstoneTeamNumber{55}
-\def \GroupMemberOne{Riley Rimer}
-\def \GroupMemberTwo{River Hendriksen}
-\def \GroupMemberThree{Corey Hemphill}
 \def \CapstoneProjectName{CoverageJSON Response Handler for OPeNDAP}
 \def \DocumentName{Technology Review}
 \def \CapstoneSponsorCompany{NASA Jet Propulsion Laboratory}
@@ -73,7 +70,7 @@
         }
         \begin{abstract}
         \centering
-        \noindent This document compares and contrasts several potential technology choices that can be used for the CoverageJSON Response Handler for OPeNDAP project. The three technologies discussed here are data access protocols, scientific data formats, and UI data models. For data access protocols, File Transfer Protocol (FTP), Thematic Real-time Environmental Distributed Data Services (THREDDS), and Open-source Project for a Network Data Access Protocol (OPeNDAP) are considered. For scientific data formats, Extensible Markup Language (XML), Climate Science Modeling Language (CSML), and CoverageJSON (CovJSON) are considered. And lastly, for UI data models, domain, application, and task models are considered.
+        \noindent This document compares and contrasts several potential technology choices that can be used for the CoverageJSON Response Handler for OPeNDAP project. The three technologies discussed here are data access protocols, scientific data formats, and UI data models. For data access protocols, File Transfer Protocol (FTP), OpenGIS Consortium (OGC) Web Coverage Service (WCS), and Open-source Project for a Network Data Access Protocol (OPeNDAP) are considered. For scientific data formats, Extensible Markup Language (XML), Climate Science Modeling Language (CSML), and CoverageJSON (CovJSON) are considered. And lastly, for UI models, domain, application, and task models are considered.
         \end{abstract}
     \end{singlespace}
 \end{titlepage}
@@ -83,18 +80,18 @@
 
 % DATA ACCESS PROTOCOLS
 	% FTP
-    % OGC WCS
-    % OPeNDAP
+	% OGC WCS
+	% OPeNDAP
 
 % SCIENTIFIC DATA FORMATS
 	% XML
-    % CSML
+	% CSML
 	% CovJSON
     
 % UI DATA MODELS
 	% DOMAIN
-    % APPLICATION
-    % TASK
+	% APPLICATION
+	% TASK
 
 \section{Technology: Data Access Protocols}
 
@@ -194,3 +191,49 @@ XML is a very simple to use metadata based markup language that caters to a wide
 Of the three choices listed, CovJSON is clearly the best candidate for the project’s data format.
 
 \section{Technology: UI Data Models}
+
+\subsection{Overview}
+In order to establish a mechanism for the use of our data access protocol to obtain scientific satellite coverage data, which are concepts discussed in prior sections of this document, a number of possible graphical user interface (GUI) models should be considered for use. This section will discuss different UI models, and will consider their attributes against the established criteria.
+\subsection{Criteria}
+\begin{enumerate}
+\item Defines user interaction, or is usage-centered
+\item Is able to represent the commands and data that the application requires
+\item Aids in simplifying user interaction
+\end{enumerate}
+
+\subsection{Potential Choices}
+
+\subsubsection{Domain Model}
+The domain model is a model that defines what objects a user sees, and what they can interact with on a given UI. Typically, a domain model also includes a data model that defines what data a user can see as well.
+
+\begin{enumerate}
+\item A domain model defines user interaction for a given UI in that it identifies the objects in the domain in which a user can interact.
+\item A domain model does not necessarily represent the commands available to the user, however, it does often come with a data model which defines what data the app requires/provides.
+\item A domain model does not aid in simplifying user interaction.
+\end{enumerate}
+
+\subsubsection{Application Model}
+The application model is a model that defines the commands and data that a given application provides to the user.
+
+\begin{enumerate}
+\item An application model strictly defines user interaction through the definition of the commands a user can use.
+\item An application model defines both the commands and data that the application provides.
+\item An application model does not inherently aid in simplifying user interaction, but defining a very limited number of commands to the user could make interaction simple enough.
+\end{enumerate}
+
+\subsubsection{Task Model}
+The task model is a model that defines the tasks that a user can perform, and determines what interaction capabilities must be designed for the application.
+
+\begin{enumerate}
+\item The task model defines what capabilities the user should have within the domain of the application.
+\item A task model neither explicitly defines the commands the user has access to, nor does it define what data is available to the user.
+\item Task models can be very complex and can define entire workflows; they are intended to capture more complex user interactions.
+\end{enumerate}
+
+\subsection{Discussion}
+All three of the UI models discussed here could likely suffice as a UI model for this project, but there is one model that fits best–the application model. Since the aim of the project is to enhance the usability of coverage data, the primary concern is keeping interaction simple. The application model strictly outlines user interaction by defining the commands that user has access too. By defining a limited number of commands available to the user, we can aim to simplify user interaction. Also, since the purpose of the project revolves around handling data, our UI model should define the data the user can interact with.
+
+\subsection{Conclusion}
+The application UI model is the candidate that fits best with the project’s intent.
+
+\end{document}
