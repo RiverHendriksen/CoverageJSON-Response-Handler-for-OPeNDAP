@@ -176,4 +176,21 @@ CSML is a modeling language that specializes in handling both atmospheric and oc
 CSML Example:
 \lstinputlisting[language=XML]{csml_ex.xml}
 
-\end{document}
+\subsubsection{CoverageJSON (CovJSON)}
+CovJSON is a markup language format that encodes geospatial coverage data types such as grids, time series, and vertical profiles, and is based on JavaScript Object Notation language (JSON). CovJSON is object oriented, and can contain a combination of domains, parameters, ranges, and metadata as object members.
+\begin{enumerate}
+\item CovJSON was specifically designed to process and handle a number of different coverage data types.
+\item Although there is some inherent complexity in representing coverage date, CovJSON is relatively simple to read and use.
+\item CovJSON is a metadata based markup language
+\end{enumerate}
+
+CovJSON Example:
+\lstinputlisting[language=XML]{covjson_ex.xml}
+
+\subsection{Discussion}
+XML is a very simple to use metadata based markup language that caters to a wide variety of data formats, however, its downfall is that it wasn’t necessarily designed to be used with coverage data. For the purpose of this project, we require a more specialized language geared towards handling coverage data. CSML is a more specialized metadata based markup language that is very similar to XML in its simplicity and ease of use, but it was also not designed to handle more complex coverage data. Although it’s a better candidate than XML, CSML still has some shortcomings that could be problematic in the future. Finally, CovJSON is a slightly more complicated, but simple to use, object-oriented markup language specifically for encoding coverage data, and it is metadata based, which makes it the perfect candidate for the project.
+
+\subsection{Conclusion}
+Of the three choices listed, CovJSON is clearly the best candidate for the project’s data format.
+
+\section{Technology: UI Data Models}
