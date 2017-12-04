@@ -1,0 +1,286 @@
+\documentclass[onecolumn, draftclsnofoot,10pt, compsoc]{IEEEtran}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+%\usepackage{caption}
+\usepackage[nonumberlist,acronym]{glossaries}
+\usepackage{hyperref}
+\usepackage{nomencl}
+\usepackage{geometry}
+\usepackage{color}
+\usepackage{float}
+
+\graphicspath{ {images/} }
+\geometry{textheight=9.5in, textwidth=7in}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{1.0,1.0,1.0}
+
+\usepackage{listings}
+\lstset{
+         basicstyle=\footnotesize\ttfamily,
+         backgroundcolor=\color{backcolour},
+    	 commentstyle=\color{codegreen},
+    	 keywordstyle=\color{magenta},
+    	 numberstyle=\tiny\color{codegray},
+    	 stringstyle=\color{codepurple},
+         morecomment=[l][\color{magenta}]{\#},
+         numberstyle=\tiny,
+         numbersep=5pt,
+         numbers=left,
+         tabsize=1,                
+         extendedchars=true,      
+         breaklines=true,        
+         showspaces=false,      
+         showtabs=false,       
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         showstringspaces=false 
+ }
+
+\def \CapstoneTeamNumber{55}
+\def \GroupMemberOne{Riley Rimer}
+\def \GroupMemberTwo{River Hendriksen}
+\def \GroupMemberThree{Corey Hemphill}
+\def \CapstoneProjectName{CoverageJSON Response Handler for OPeNDAP}
+\def \CapstoneSponsorCompany{NASA Jet Propulsion Laboratory}
+\def \CapstoneSponsorPerson{Lewis John McGibbney}
+
+\def \DocType{	%Problem Statement
+				%Requirements Document
+				%Technology Review
+				%Design Document
+				Progress Report
+				}
+			
+\newcommand{\NameSigPair}[1]{\par
+\makebox[2.75in][r]{#1} \hfil 	\makebox[3.25in]{\makebox[2.25in]{\hrulefill} \hfill		\makebox[.75in]{\hrulefill}}
+\par\vspace{-12pt} \textit{\tiny\noindent
+\makebox[2.75in]{} \hfil	\makebox[3.25in]{\makebox[2.25in][r]{Signature} \hfill	\makebox[.75in][r]{Date}}}}
+% 3. If the document is not to be signed, uncomment the RENEWcommand below
+\renewcommand{\NameSigPair}[1]{#1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{titlepage}
+    \pagenumbering{gobble}
+    \begin{singlespace}
+        \hfill    
+        \par\vspace{.2in}
+        \centering
+        \scshape{
+            \huge CS Capstone \DocType \par
+            {\large\today}\par
+            \vspace{.5in}
+            \textbf{\Huge\CapstoneProjectName}\par
+                        \vspace{.5in}
+
+            \vfill
+            {\large Prepared for}\par
+            \Huge \CapstoneSponsorCompany\par
+            \vspace{5pt}
+            {\Large\NameSigPair{\CapstoneSponsorPerson}\par}
+            {\large Prepared by }\par
+            Group\CapstoneTeamNumber\par
+            \vspace{5pt}
+            {\Large
+                \NameSigPair{\GroupMemberOne}\par
+                \NameSigPair{\GroupMemberTwo}\par
+                \NameSigPair{\GroupMemberThree}\par
+            }
+            \vspace{20pt}
+        }
+        \begin{abstract}
+        	This document briefly recaps the CoverageJSON Response Handler for OPeNDAP project purposes and goals, describes where we are currently on the project, describes any problems that have impeded the project's progress, and solutions to the problems encountered. This document also provides examples of particularly interesting pieces of code, and a retrospective of the past 10 weeks for CS461 Senior Capstone term one of three.
+        \end{abstract}
+    \end{singlespace}
+\end{titlepage}
+\newpage
+\pagenumbering{arabic}
+\tableofcontents
+% 7. uncomment this (if applicable). Consider adding a page break.
+%\listoffigures
+%\listoftables
+\clearpage
+%start doc sections
+\section{Project Overview}
+\subsection{Purpose}
+The purpose of this project is to integrate a new response handler for the CoverageJSON data format into the currently existing collection of data response handlers within the OPeNDAP network data access protocol. OPeNDAP does not currently provide a handler for a coverage data format like CoverageJSON, which is a structure that associates positions in space and time with the corresponding data values. The addition of the CoverageJSON format into OPeNDAP will allow for more fluid development of coverage data based web applications by NASA JPL and all other OPeNDAP users. Due to the desire for the new CoverageJSON response handler to be integrated into the OPeNDAP open-source project, it will need to be accompanied by extensive documentation and testing. This project will also include testing current NASA satellite data in OPeNDAP on the proposed response handler and creating a promotional poster for the American Geophysical Union.
+
+\subsection{Goals}
+\begin{itemize}
+\item Work with the NASA JPL and OPenDAP team to obtain an initial understanding of what the OPeNDAP codebase looks like.
+\item Design and engineer a proposed solution for how an OPenDAP CovJSON response handler would work.
+\item Implement a solution including accompanying tests and documentation.
+\item Integrate the project into the OPeNDAP codebase.
+\end{itemize}
+
+\subsection{Deliverables}
+\begin{itemize}
+\item A CoverageJSON Response Handler for OPeNDAP project Github site.
+\item An engineered C++ solution for an OPeNDAP CovJSON response handler.
+\item Unit tests and documentation for the CovJSON response handler.
+\item A poster to the American Geophysical Union (AGU) that evangelizes the project.
+\end{itemize}
+
+\section{Project Progress}
+This term of the project has been primarily focused on producing the following documents:
+\begin{itemize}
+\item Problem Statement
+\item Requirements Document
+\item Technology Review
+\item Design Document
+\end{itemize}
+Each will be summarized in the following sections.
+
+\subsection{Problem Statement}
+The problem statement document builds the working definition of the problem we are trying to solve through this project. It also describes the metrics with which the success of the project will be weighed on at the end.
+
+\subsection{Requirements Document}
+The requirements document outlines the "what" of the project, explaining what is to be done and what the client should expect by the end of the project. Since our project is about integrating a module into a larger project, much of what was said was redundant with the problem statement. However, it differs from the problem statement in that it provides a more specific timeline for the project using a Gantt chart, and it also explicitly states what is required in order for the project to be a success.
+
+\subsection{Technology Review}
+The technology review was created as a means for the developers to explore different technologies that already exist in the fields that are going to be developed. More specifically, the document explores the following: 
+\begin{itemize}
+\item Coding Languages
+\item Hosts
+\item Servers
+\item Data Access Protocols
+\item Scientific Data Formats
+\item UI Data Models
+\item Testing Frameworks
+\item Web Application Framework
+\item UI Interaction
+\end{itemize}
+The strict requirements that were already in place prior to the technology review made it difficult to deviate from the technologies that were already predetermined for the project. However, the review did provide insight into how other technologies were implemented which could prove to be useful as a reference in the future.
+
+\subsection{Design Document}
+The design document was created to inform clients and future developers at a high-level how the technologies that are being developed will be implemented within OPeNDAP. There were in-depth discussions on how each component of the project was to be implemented, however, it is unfinished in its current state and will change as development progresses. 
+
+\subsection{Project Status}
+At the current time, the project is ready to enter the coding and implementation phase. Much of this term was dedicated to the creation of documents rather than the creation of code, which seemed to drag the term out. In addition, many of the documents required specifications that did not directly apply to our project, which required us to go outside the box, so to speak. In the future, several documents will need to be revised in order to be relevant by the end of the project. The team expects to work  during winter break as there will be more free time to work on the project. 
+
+\section{Some Interesting Code}
+
+\subsection{CoverageJSON Example}
+\begin{figure}[H]
+    \centering
+    \lstinputlisting[language=XML]{covjson.xml}
+    %\caption{CoverageJSON Example}
+    \label{fig:covjson}
+\end{figure}
+
+\section{Fall Term Summary}
+\subsection{Week 1 --- September 25, 2017}
+\subsubsection{Summary}
+The first week was the introductory week of class. The primary focus of the week was to go over the course syllabus and schedule, prepare individual professional biographies, and setup class OneNote logs. Project teams were not yet been established at this time.
+\subsubsection{Problems \& Solutions}
+No problems or concerns to discuss for week one.
+
+\subsection{Week 2 --- October 2, 2017}
+\subsubsection{Summary}
+The CoverageJSON Response Handler for OPeNDAP Project team was  established. The team made contact with Lewis John McGibbney, our NASA JPL client, and set up an icebreaker video conference. During the conference, we discussed the project from a high-level point of view, and also what to expect working with each other on this project over the next couple of months. Lewis assigned tasks to help team members get acclimated to OPeNDAP and CoverageJSON. We also established biweekly project meetings to take place every other Tuesday. The team began work immediately on assigned tasks as well as the problem statement assignment.
+\subsubsection{Problems \& Solutions}
+The only concerns for week two involve the individual schedules of the team members. All three team members are students, and we have jobs as well. This could potentially make scheduling future meetings and work sessions difficult. The solution to this concern was simply that we must communicate well and be flexible with each other, especially when it comes to deadlines. The expectation is and was that this concern will be a non-issue, but its worth acknowledging.
+
+\subsection{Week 3 --- October 9, 2017}
+\subsubsection{Summary}
+The problem statement individual drafts were due Monday, October 9th on TEACH. Each team member submitted their own problem statement document. During week three, the team collaborated to determine which problem statement draft we would revise and submit as our final draft. For the remainder of the week, writing the problem statement final draft and understanding the purpose of the project were the highest priority tasks. In order to write an effective problem statement, we needed to have a rudimentary understanding of the components involved with the project, namely OPeNDAP and CovJSON.
+\subsubsection{Problems \& Solutions}
+No problems or concerns to discuss for week three.
+
+\subsection{Week 4 --- October 16, 2017}
+\subsubsection{Summary}
+The main focus of week four was to finish wrapping up some of the administrative work so that we could move towards starting requirements gathering, design, and implementation planning. We submitted the final problem statement document, and we also had a biweekly meeting with Lewis this week, and we all agreed that we were on track to ramp up on the project. Lewis has introduced the team to two more client's, Jim and Jon, who will be acting as OPeNDAP contacts for project development. One of the project deliverables, a project Github website which we will contribute to over the coming months, was established this week as well. The Github website will be where the team stores all of the assignments and documents for the project, as well as the project source code, unit-tests and results, and documentation. The team was also tasked with getting comfortable with using the PyCovJSON viewer and convert tools with different scientific data formats. This task required us to set up a Linux virtual machine with PyCovJSON. We also wrote a summary of the features of NASA JPL PO.DAAC website, and examined different scientific data formats such as HDF and NetCDF.
+\subsubsection{Problems \& Solutions}
+No problems or concerns to discuss for week four.
+
+\subsection{Week 5 --- October 23, 2017}
+\subsubsection{Summary}
+The project requirements document was the top priority for week five. Much of our week consisted of writing and reviewing requirements. The draft requirements document was due the Tuesday the following week, and the final document only a few days later, so it was imperative that we treat this assignment as our highest priority task. At this point, we had still yet to set up a Linux virtual machine to begin using PyCovJSON. Setting up the virtual machine with the necessary dependencies and installing PyCovJSON will be a relatively time consuming task, so we decided to put the task on hold until the requirements document was finished.
+\subsubsection{Problems \& Solutions}
+No problems or concerns to discuss for week five.
+
+\subsection{Week 6 --- October 30, 2017}
+\subsubsection{Summary}
+The team completed a review of the requirements document and performed a final proof-read before meeting with Lewis and submitting the document for review. Once Lewis approved our requirements document for submission, the approval email from Lewis was forwarded to the course instructors for verification of the approval. During the week, we were finally able to set up an Ubuntu virtual machine with all necessary Python, Anaconda, and PyCovJSON dependencies. Now that we had a running VM, we could begin using and analyzing PyCovJSON to see how it works.
+\subsubsection{Problems \& Solutions}
+No problems or concerns to discuss for week six.
+
+\subsection{Week 7 --- November 6, 2017}
+\subsubsection{Summary}
+The new assignment to work on for week seven was the individual tech-review documents. Each team member was required to write and submit their own tech-review document. We established a general format to follow for the the individual documents, and then the remainder of the work was done solo.
+
+\subsubsection{Problems \& Solutions}
+No problems or concerns to discuss for week seven.
+
+\subsection{Week 8 --- November 13, 2017}
+\subsubsection{Summary}
+Meeting with client and founder of OPeNDAP, James Gallagher. James presented an informative piece on the Hyrax Server. After this event the group began setup of the Hyrax server on the Amazon EC2 Red Hat instance that was created a few weeks prior.
+
+\subsubsection{Problems \& Solutions}
+A few concerns were created with the hosting of the Hyrax Server. While there is the EC2 instance, it is limited in space and there has not been a discussion with the client about where other possible host locations may be. We have yet to come up with a solution for this concern.
+
+\subsection{Week 9 --- November 20, 2017}
+\subsubsection{Summary}
+Week nine focused on completing finalized tech-review documents due on November 21. The tech-review documents were to be used as foundations for the upcoming design document, which was the next major assignment. Our priority was to research different design views and approaches, and generate a high-level design approach for each different component of the project. 
+\subsubsection{Problems \& Solutions}
+No problems or concerns to discuss for week nine.
+
+\subsection{Week 10 --- November 27, 2017}
+\subsubsection{Summary}
+During week ten, the team continued researching and collaborating on the design document. Due to the length and scope of requirements of this particular document, the team was stretched thin in terms of time. However, the document was completed and submitted on time. The next phase of the project will be revising and finalizing the design document, and then preparing for the implementation phase, which should come next term in CS462.
+\subsubsection{Problems \& Solutions}
+No problems or concerns to discuss for week ten.
+
+\section{Fall Term Retrospective}
+
+\begin{center}
+\begin{tabular}{ |p{0.3\linewidth}|p{0.3\linewidth}|p{0.3\linewidth}| } 
+	\hline
+	Positives & Deltas & Actions \\ 
+	\hline
+  	There was good communication throughout this first term of the project.
+   	& 
+    Communication should be more visible to all the project members.
+	&
+    Project updates and information that is relevant should be put into the email group.
+    \\ 
+    \hline
+    The information we have gotten so far on the systems we will be working with so far has been great.
+   	& 
+    We will need more information as this project continues next term and we actually begin the implementation.
+	&
+    We will be in communication with Lewis and other applicable members from OPeNDAP or the community to get access to the knowledge needed.
+    \\ 
+    \hline
+    Scheduling conflicts during the term were kept to an absolute minimum.
+    &
+    Project team members should aim to eliminated scheduling conflicts entirely.
+    &
+    Team members will should notify the team immediately upon realizing a conflict. This should allow for greater flexibility.
+    \\
+	\hline
+     Moving to the implementation phase next term should be more time consuming, engaging, and interesting.
+    &
+    Project team members should commit a minimum amount of time per week to ensure deadlines are met.
+    &
+    Team members will commit to spending a minimum of six hours a week on coding and testing.
+    \\
+    \hline
+    All assignments were submitted on time.
+    &
+    Some documents could have been better thought out.
+    &
+    Team members will try to better manage their time and start assignments promptly.
+    \\
+    \hline
+\end{tabular}
+\end{center}
+
+\end{document}
